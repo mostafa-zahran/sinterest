@@ -1,7 +1,7 @@
 require 'rails_helper'
 require 'cancan/matchers'
 RSpec.describe User, type: :model do
-  it { should respond_to(:name, :email, :admin?, :user_token) }
+  it { should respond_to(:name, :email, :admin?, :user_token, :tracks, :playlists) }
   it do
     should validate_presence_of(:name)
     should validate_presence_of(:email)

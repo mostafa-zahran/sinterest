@@ -34,6 +34,8 @@ class Ability
     elsif user.persisted?
       can [:index, :show], :all
       can [:update, :destroy], User, id: user.id
+      can [:update, :destroy], [Track, Playlist], user_id: user.id
+      can :create, [Track, Playlist]
     else
       can [:index, :show], :all
       can :create, User
