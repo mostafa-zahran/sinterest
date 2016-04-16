@@ -20,7 +20,7 @@ RSpec.describe User, type: :model do
       it{ should be_able_to(:manage, User.new) }
     end
     context 'when is a normal' do
-      let(:user){ FactoryGirl.create :user, name: 'Mona Ali', email: 'mona.ali@gmail.com', admin: false }
+      let(:user){ FactoryGirl.create :user, name: 'Mona Ali', email: 'mona.ali@gmail.com', admin: false, password: '123456789', password_confirmation: '123456789' }
       it{ should be_able_to(:index, [User.new, user]) }
       it{ should be_able_to(:show, [User.new, user]) }
       it{ should be_able_to(:update, user, id: user.id) }

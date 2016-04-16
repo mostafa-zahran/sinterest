@@ -5,7 +5,7 @@ include EnsureReturnAllPlaylists
 RSpec.describe 'Playlist', type: :request do
   before do
     @admin = FactoryGirl.create :user
-    @normal = FactoryGirl.create :user, name: 'Mona Ali', email: 'mona.ali@gmail.com', admin: false
+    @normal = FactoryGirl.create :user, name: 'Mona Ali', email: 'mona.ali@gmail.com', admin: false, password: '123456789', password_confirmation: '123456789'
     @admin_playlist = FactoryGirl.create :playlist, name: 'Admin Playlist', user_id: @admin.id
     @normal_playlist = FactoryGirl.create :playlist, name: 'Normal Playlist', user_id: @normal.id
     @admin_tracks = []

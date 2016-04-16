@@ -18,7 +18,7 @@ RSpec.describe Track, type: :model do
       it { should be_able_to(:manage, Track.new) }
     end
     context 'when is a normal' do
-      let(:user) { FactoryGirl.create :user, name: 'Mona Ali', email: 'mona.ali@gmail.com', admin: false }
+      let(:user) { FactoryGirl.create :user, name: 'Mona Ali', email: 'mona.ali@gmail.com', admin: false, password: '123456789', password_confirmation: '123456789' }
       let(:track) { FactoryGirl.create :track, name: 'My Track', user_id: user.id, sound_track: Rails.root.join('spec/dog_puppy.wav').open }
       it { should be_able_to(:index, [Track.new, track]) }
       it { should be_able_to(:show, [Track.new, track]) }

@@ -7,6 +7,8 @@ class User < ApplicationRecord
   validates_uniqueness_of :name, :email
   validates_length_of :name, minimum: 4
 
+  has_secure_password
+
   # Assign an Token key on create
   before_validation on: :create do |user|
     user.user_token = user.generate_user_token

@@ -38,7 +38,7 @@ module V1
     private
 
     def user_params
-      params.permit(:name, :email, :admin)
+      params.permit(:name, :email, :admin, :password, :password_confirmation)
     end
   end
 end

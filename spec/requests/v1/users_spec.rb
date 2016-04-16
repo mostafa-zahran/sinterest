@@ -5,7 +5,7 @@ include EnsureReturnAllUsers
 RSpec.describe 'User', type: :request do
   before do
     @admin = FactoryGirl.create :user
-    @normal = FactoryGirl.create :user, name: 'Mona Ali', email: 'mona.ali@gmail.com', admin: false
+    @normal = FactoryGirl.create :user, name: 'Mona Ali', email: 'mona.ali@gmail.com', admin: false, password: '123456789', password_confirmation: '123456789'
   end
 
   describe 'GET /v1/users' do
@@ -66,7 +66,7 @@ RSpec.describe 'User', type: :request do
 
   describe 'POST /v1/users' do
     before do
-      @new_user = {name: 'Maha Awaad', email: 'maha.awaad@gmail.com'}
+      @new_user = {name: 'Maha Awaad', email: 'maha.awaad@gmail.com', password: '123456789', password_confirmation: '123456789'}
     end
     context 'Guest Session' do
       it 'creates the specified user' do

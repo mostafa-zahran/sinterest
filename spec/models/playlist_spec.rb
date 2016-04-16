@@ -17,7 +17,7 @@ RSpec.describe Playlist, type: :model do
       it { should be_able_to(:manage, Playlist.new) }
     end
     context 'when is a normal' do
-      let(:user) { FactoryGirl.create :user, name: 'Mona Ali', email: 'mona.ali@gmail.com', admin: false }
+      let(:user) { FactoryGirl.create :user, name: 'Mona Ali', email: 'mona.ali@gmail.com', admin: false, password: '123456789', password_confirmation: '123456789'}
       let(:playlist) { FactoryGirl.create :playlist, name: 'My Playlist2', user_id: user.id}
       it { should be_able_to(:index, [Playlist.new, playlist]) }
       it { should be_able_to(:show, [Playlist.new, playlist]) }

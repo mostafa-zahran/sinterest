@@ -7,5 +7,7 @@ Rails.application.routes.draw do
     resources :users
     resources :tracks
     resources :playlists
+    post 'sessions' => 'sessions#create'
+    delete 'sessions' => 'sessions#destroy'
   end
 end

@@ -5,7 +5,7 @@ include EnsureReturnAllTracks
 RSpec.describe 'Track', type: :request do
   before do
     @admin = FactoryGirl.create :user
-    @normal = FactoryGirl.create :user, name: 'Mona Ali', email: 'mona.ali@gmail.com', admin: false
+    @normal = FactoryGirl.create :user, name: 'Mona Ali', email: 'mona.ali@gmail.com', admin: false, password: '123456789', password_confirmation: '123456789'
     @admin_track = FactoryGirl.create :track, name: 'My Dog', user_id: @admin.id, sound_track: Rails.root.join('spec/dog_puppy.wav').open
     @normal_track = FactoryGirl.create :track, name: 'My Dog', user_id: @normal.id, sound_track: Rails.root.join('spec/dog_puppy.wav').open
   end
