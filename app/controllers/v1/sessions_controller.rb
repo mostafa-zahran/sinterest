@@ -2,7 +2,11 @@ module V1
   class SessionsController < ApplicationController
     def create
       result = Signin.call(session_params: session_params, current_user: current_user)
-      render json: result.success? ? result.user : [], status: result.success? ? :ok : :unprocessable_entity
+      if result.success?
+        render json: result.user, meta: {include_token: true}, status: :ok
+      else
+        render json: nil, status: :unprocessable_entity
+      end
     end
 
     def destroy

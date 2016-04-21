@@ -39,7 +39,7 @@ RSpec.describe 'User', type: :request do
         body = JSON.parse(response.body)
         expect(body['user']['name']) == @admin.name
         expect(body['user']['email']) == @admin.email
-        expect(body['user']['user_token']).not_to be_empty
+        expect(body['user']['user_token']).to be_blank
       end
     end
     context 'Admin Session' do
@@ -49,7 +49,7 @@ RSpec.describe 'User', type: :request do
         body = JSON.parse(response.body)
         expect(body['user']['name']) == @admin.name
         expect(body['user']['email']) == @admin.email
-        expect(body['user']['user_token']).not_to be_empty
+        expect(body['user']['user_token']).to be_blank
       end
     end
     context 'Normal Session' do
@@ -59,7 +59,7 @@ RSpec.describe 'User', type: :request do
         body = JSON.parse(response.body)
         expect(body['user']['name']) == @admin.name
         expect(body['user']['email']) == @admin.email
-        expect(body['user']['user_token']).not_to be_empty
+        expect(body['user']['user_token']).to be_blank
       end
     end
   end
@@ -75,7 +75,7 @@ RSpec.describe 'User', type: :request do
         body = JSON.parse(response.body)
         expect(body['user']['name']) == @new_user[:name]
         expect(body['user']['email']) == @new_user[:email]
-        expect(body['user']['user_token']).not_to be_empty
+        expect(body['user']['user_token']).to be_blank
       end
     end
     context 'Admin Session' do
@@ -85,7 +85,7 @@ RSpec.describe 'User', type: :request do
         body = JSON.parse(response.body)
         expect(body['user']['name']) == @new_user[:name]
         expect(body['user']['email']) == @new_user[:email]
-        expect(body['user']['user_token']).not_to be_empty
+        expect(body['user']['user_token']).to be_blank
       end
     end
     context 'Normal Session' do
