@@ -13,28 +13,28 @@ RSpec.describe User, type: :model do
   end
 
   describe 'abilities' do
-    subject(:ability){ Ability.new(user) }
-    let(:user){ nil }
+    subject(:ability) { Ability.new(user) }
+    let(:user) { nil }
     context 'when is an admin' do
-      let(:user){ FactoryGirl.create :user }
-      it{ is_expected.to be_able_to(:manage, User.new) }
+      let(:user) { FactoryGirl.create :admin_user }
+      it { is_expected.to be_able_to(:manage, User.new) }
     end
     context 'when is a normal' do
-      let(:user){ FactoryGirl.create :user, name: 'Mona Ali', email: 'mona.ali@gmail.com', admin: false, password: '123456789', password_confirmation: '123456789' }
-      it{ is_expected.to be_able_to(:index, [User.new, user]) }
-      it{ is_expected.to be_able_to(:show, [User.new, user]) }
-      it{ is_expected.to be_able_to(:update, user, id: user.id) }
-      it{ is_expected.not_to be_able_to(:update, User.new) }
-      it{ is_expected.to be_able_to(:destroy, user, id: user.id) }
-      it{ is_expected.not_to be_able_to(:destroy, User.new) }
-      it{ is_expected.not_to be_able_to(:create, User.new) }
+      let(:user) { FactoryGirl.create :normal_user }
+      it { is_expected.to be_able_to(:index, [User.new, user]) }
+      it { is_expected.to be_able_to(:show, [User.new, user]) }
+      it { is_expected.to be_able_to(:update, user, id: user.id) }
+      it { is_expected.not_to be_able_to(:update, User.new) }
+      it { is_expected.to be_able_to(:destroy, user, id: user.id) }
+      it { is_expected.not_to be_able_to(:destroy, User.new) }
+      it { is_expected.not_to be_able_to(:create, User.new) }
     end
     context 'when is a guest' do
-      it{ is_expected.to be_able_to(:index, User.new) }
-      it{ is_expected.to be_able_to(:show, User.new) }
-      it{ is_expected.not_to be_able_to(:update, User.new) }
-      it{ is_expected.not_to be_able_to(:destroy, User.new) }
-      it{ is_expected.to be_able_to(:create, User.new) }
+      it { is_expected.to be_able_to(:index, User.new) }
+      it { is_expected.to be_able_to(:show, User.new) }
+      it { is_expected.not_to be_able_to(:update, User.new) }
+      it { is_expected.not_to be_able_to(:destroy, User.new) }
+      it { is_expected.to be_able_to(:create, User.new) }
     end
   end
 end

@@ -13,12 +13,12 @@ RSpec.shared_examples 'ensure_return_all_playlists' do
 end
 
 RSpec.describe 'Playlist', type: :request do
-  let!(:admin) { FactoryGirl.create :user }
-  let!(:normal) { FactoryGirl.create :user, name: 'Mona Ali', email: 'mona.ali@gmail.com', admin: false, password: '123456789', password_confirmation: '123456789' }
-  let!(:admin_playlist) { FactoryGirl.create :playlist, name: 'Admin Playlist', user_id: admin.id }
-  let!(:normal_playlist) { FactoryGirl.create :playlist, name: 'Normal Playlist', user_id: normal.id }
-  let!(:admin_tracks) { (1..3).map { FactoryGirl.create(:track, name: 'My Dog', user_id: admin.id, sound_track: Rails.root.join('spec/dog_puppy.wav').open).id } }
-  let!(:normal_tracks) { (1..3).map { FactoryGirl.create(:track, name: 'My Dog', user_id: normal.id, sound_track: Rails.root.join('spec/dog_puppy.wav').open).id } }
+  let!(:admin) { FactoryGirl.create :admin_user }
+  let!(:normal) { FactoryGirl.create :normal_user }
+  let!(:admin_playlist) { FactoryGirl.create :admin_playlist, user_id: admin.id }
+  let!(:normal_playlist) { FactoryGirl.create :normal_playlist, user_id: normal.id }
+  let!(:admin_tracks) { FactoryGirl.create_list(:admin_track, 3, user_id: admin.id).map(&:id) }
+  let!(:normal_tracks) { FactoryGirl.create_list(:normal_track, 3, user_id: normal.id).map(&:id) }
 
   describe 'GET /v1/playlists' do
     context 'Guest Session' do

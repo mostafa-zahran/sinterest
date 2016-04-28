@@ -6,17 +6,17 @@ RSpec.shared_examples 'ensure_return_all_tracks' do
     expect(response.status).to eq 200
     body = JSON.parse(response.body)
     track_names = body['tracks'].map { |track| track['name'] }
-    expect(track_names).to match_array(['My Dog', 'My Dog'])
+    expect(track_names).to match_array(['Admin Dog', 'Normal Dog'])
     track_user_ids = body['tracks'].map { |track| track['user_id'] }
     expect(track_user_ids).not_to be_empty
   end
 end
 
 RSpec.describe 'Track', type: :request do
-  let!(:admin){FactoryGirl.create :user}
-  let!(:normal){FactoryGirl.create :user, name: 'Mona Ali', email: 'mona.ali@gmail.com', admin: false, password: '123456789', password_confirmation: '123456789'}
-  let!(:admin_track){FactoryGirl.create :track, name: 'My Dog', user_id: admin.id, sound_track: Rails.root.join('spec/dog_puppy.wav').open}
-  let!(:normal_track){FactoryGirl.create :track, name: 'My Dog', user_id: normal.id, sound_track: Rails.root.join('spec/dog_puppy.wav').open}
+  let!(:admin) { FactoryGirl.create :admin_user }
+  let!(:normal) { FactoryGirl.create :normal_user }
+  let!(:admin_track) { FactoryGirl.create :admin_track, user_id: admin.id }
+  let!(:normal_track) { FactoryGirl.create :normal_track, user_id: normal.id }
 
   describe 'GET /v1/tracks' do
     context 'Guest Session' do
@@ -69,7 +69,7 @@ RSpec.describe 'Track', type: :request do
   end
 
   describe 'POST /v1/tracks' do
-    let!(:new_track){{name: 'My Dog', sound_track: Rack::Test::UploadedFile.new(Rails.root.join('spec/dog_puppy.wav').open)}}
+    let!(:new_track) { {name: 'My Dog', sound_track: Rack::Test::UploadedFile.new(Rails.root.join('spec/dog_puppy.wav').open)} }
     context 'Guest Session' do
       it 'can not create track' do
         post '/v1/tracks', new_track, headers: {'Content-Type': 'application/json'}
@@ -96,7 +96,7 @@ RSpec.describe 'Track', type: :request do
   end
 
   describe 'PUT /v1/tracks/:id' do
-    let!(:updated_track){{name: 'My new dog'}}
+    let!(:updated_track) { {name: 'My new dog'} }
     context 'Guest Session' do
       it 'can not update any track' do
         put "/v1/tracks/#{admin_track.id}", params: updated_track.to_json, headers: {'Content-Type': 'application/json'}

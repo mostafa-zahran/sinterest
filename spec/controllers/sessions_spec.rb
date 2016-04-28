@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe V1::SessionsController, type: :controller do
-  let!(:admin) { FactoryGirl.create :user }
-  let!(:normal) { FactoryGirl.create :user, name: 'Mona Ali', email: 'mona.ali@gmail.com', admin: false, password: '123456789', password_confirmation: '123456789' }
+  let!(:admin) { FactoryGirl.create :admin_user }
+  let!(:normal) { FactoryGirl.create :normal_user}
   let!(:new_user) { {password: '123456789', email: 'mona.ali@gmail.com'} }
 
   describe 'POST /v1/sessions' do

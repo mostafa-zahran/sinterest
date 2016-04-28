@@ -15,8 +15,8 @@ RSpec.shared_examples 'ensure_return_all_users' do
 end
 
 RSpec.describe 'User', type: :request do
-  let!(:admin){FactoryGirl.create :user}
-  let!(:normal){FactoryGirl.create :user, name: 'Mona Ali', email: 'mona.ali@gmail.com', admin: false, password: '123456789', password_confirmation: '123456789'}
+  let!(:admin) { FactoryGirl.create :admin_user }
+  let!(:normal) { FactoryGirl.create :normal_user }
 
   describe 'GET /v1/users' do
     context 'Guest Session' do
