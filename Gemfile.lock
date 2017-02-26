@@ -24,8 +24,11 @@ GEM
       erubis (~> 2.7.0)
       rails-dom-testing (~> 1.0, >= 1.0.5)
       rails-html-sanitizer (~> 1.0, >= 1.0.2)
-    active_model_serializers (0.9.5)
-      activemodel (>= 3.2)
+    active_model_serializers (0.10.4)
+      actionpack (>= 4.1, < 6)
+      activemodel (>= 4.1, < 6)
+      case_transform (>= 0.2)
+      jsonapi (= 0.1.1.beta6)
     activejob (5.0.0.beta3)
       activesupport (= 5.0.0.beta3)
       globalid (>= 0.3.6)
@@ -50,6 +53,8 @@ GEM
       activesupport (>= 3.2.0)
       json (>= 1.7)
       mime-types (>= 1.16)
+    case_transform (0.2)
+      activesupport
     concurrent-ruby (1.0.1)
     diff-lcs (1.2.5)
     erubis (2.7.0)
@@ -63,7 +68,12 @@ GEM
       activesupport (>= 4.1.0)
     i18n (0.7.0)
     interactor (3.1.0)
-    json (1.8.3)
+    json (2.0.3)
+    jsonapi (0.1.1.beta6)
+      jsonapi-parser (= 0.1.1.beta3)
+      jsonapi-renderer (= 0.1.1.beta1)
+    jsonapi-parser (0.1.1.beta3)
+    jsonapi-renderer (0.1.1.beta1)
     listen (3.0.6)
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9.7)
@@ -160,7 +170,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  active_model_serializers
+  active_model_serializers (~> 0.10.0)
   bcrypt (~> 3.1.7)
   byebug
   cancancan
@@ -180,4 +190,4 @@ DEPENDENCIES
   tzinfo-data
 
 BUNDLED WITH
-   1.11.2
+   1.14.4
