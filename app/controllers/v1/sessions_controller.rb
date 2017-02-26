@@ -3,7 +3,7 @@ module V1
     def create
       result = Signin.call(session_params: session_params, current_user: current_user)
       if result.success?
-        render json: result.user, meta: {include_token: true}, status: :ok
+        render json: {user: UserSerializer.new(result.user, scope: {include_token: true})}, status: :ok
       else
         render json: nil, status: :unprocessable_entity
       end

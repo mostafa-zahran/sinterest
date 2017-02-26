@@ -4,18 +4,18 @@ module V1
 
     def index
       result = GetAllTracks.call
-      render json: result.success? ? result.tracks : []
+      render json: {tracks: result.success? ? result.tracks.map{|track| TrackSerializer.new(track)} : []}
     end
 
     def show
       result = GetTrackById.call(id: params[:id])
-      render json: result.success? ? result.track : []
+      render json: {track: result.success? ? TrackSerializer.new(result.track) : []}
     end
 
     def create
       result = CreateTrack.call(track_params: track_params, user_id: current_user.id)
       if result.success?
-        render json: result.track, status: :created, location: v1_track_url(result.track)
+        render json: {track: TrackSerializer.new(result.track)}, status: :created, location: v1_track_url(result.track)
       else
         render json: result.track.errors, status: :unprocessable_entity
       end
@@ -24,7 +24,7 @@ module V1
     def update
       result = UpdateTrack.call(id: params[:id], track_params: track_params)
       if result.success?
-        render json: result.track
+        render json: {track: TrackSerializer.new(result.track)}
       else
         render json: result.track.errors, status: :unprocessable_entity
       end

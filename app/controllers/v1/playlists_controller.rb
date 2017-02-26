@@ -4,18 +4,18 @@ module V1
 
     def index
       result = GetAllPlaylists.call
-      render json: result.success? ? result.playlists : []
+      render json: {playlists: result.success? ? result.playlists.map{|playlist| PlaylistSerializer.new(playlist)} : []}
     end
 
     def show
       result = GetPlaylistById.call(id: params[:id])
-      render json: result.success? ? result.playlist : []
+      render json: {playlist: result.success? ? PlaylistSerializer.new(result.playlist) : []}
     end
 
     def create
       result = CreatePlaylist.call(playlist_params: playlist_params, user_id: current_user.id)
       if result.success?
-        render json: result.playlist, status: :created, location: v1_playlist_url(result.playlist)
+        render json: {playlist: PlaylistSerializer.new(result.playlist)}, status: :created, location: v1_playlist_url(result.playlist)
       else
         render json: result.playlist.errors, status: :unprocessable_entity
       end
@@ -24,7 +24,7 @@ module V1
     def update
       result = UpdatePlaylist.call(id: params[:id], playlist_params: playlist_params)
       if result.success?
-        render json: result.playlist
+        render json: {playlist: PlaylistSerializer.new(result.playlist)}
       else
         render json: result.playlist.errors, status: :unprocessable_entity
       end

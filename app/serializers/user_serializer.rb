@@ -1,12 +1,8 @@
 class UserSerializer < ActiveModel::Serializer
   attributes :id, :name, :email, :user_token
 
-  def filter(keys)
-    if meta && meta[:include_token]
-      keys
-    else
-      keys - [:user_token]
-    end
+  def user_token
+    object.user_token if scope && scope[:include_token]
   end
 
   has_many :tracks

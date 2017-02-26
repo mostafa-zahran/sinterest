@@ -6,9 +6,9 @@ RSpec.shared_examples 'ensure_return_all_users' do
     expect(response.status).to eq 200
     body = JSON.parse(response.body)
     user_names = body['users'].map { |user| user['name'] }
-    expect(user_names).to match_array(['Mostafa Kamel', 'Mona Ali'])
+    expect(user_names).to match_array(['Mostafa Kamel', 'Mona Ali', 'Administrator', 'Test User'])
     user_emails = body['users'].map { |user| user['email'] }
-    expect(user_emails).to match_array(%w(mostafa.k.zahran@gmail.com mona.ali@gmail.com))
+    expect(user_emails).to match_array(%w(mostafa.k.zahran@gmail.com mona.ali@gmail.com admin@sinterest.com test_user1@sinterest.com))
     user_token = body['users'].map { |user| user['user_token'] }
     expect(user_token).not_to be_empty
   end
